@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="icon" type="image/x-icon" href="assets/imgs/heart.png">
+
+    <link href="css/heartClock.css" rel="stylesheet">
+    <link href="css/love_train.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <title>hi baby :3</title>
+</head>
+<body>
+    <img id="clickScreen" src="assets/imgs/heart_hole.png" onclick="clickScreen(this)">
+    <div id="welcomeText">Click to start the page!</div>
+    <div id="bgGradient"></div>
+    <div id="divBody">
+        <div id="heartDiv">
+            <img id="heartClock" src="assets/imgs/heart.png">
+            <img id="heartTick" src="assets/imgs/heart.png">
+        </div>
+        <div class="middleItems" id="timecontainer">
+            <div id="time">0 months, 0 days, 0 hours, 0 minutes, 0 seconds left</div>
+            <div id="timedesc">till our anniversary!</div>
+        </div>
+    </div>
+    <div id="trainDiv">
+        <object id="loveTrain" type="image/svg+xml" data="assets/imgs/love_train.svg"></object>
+        <div id="trainText">Our special day is coming up! :3</div>
+    </div>
+</body>
+<script src="js/heartClock.js"></script>
+<script src="js/functions.js"></script>
+<script src="js/wavytext.js"></script>
+</html>

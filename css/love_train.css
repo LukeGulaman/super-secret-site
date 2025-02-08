@@ -1,0 +1,52 @@
+@keyframes moveTrain {
+    0% {
+        transform: translateX(0%);
+    }
+    100% {
+        transform: translateX(140vw);
+    }
+}
+@keyframes wavy {
+    0% { transform: translateY(15px); }
+    50% { transform: translateY(5px); }
+    100% { transform: translateY(15px); }
+}
+
+#trainDiv {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: right;
+    align-items: center;
+
+    width: 1000px;
+    height: 100px;
+
+    position: absolute;
+    bottom: 0%;
+    right: 100%;
+    animation: moveTrain 60s linear 0s infinite forwards;
+}
+#loveTrain {
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+    margin-left: 10px;
+}
+#trainText {
+    text-align: right;
+    font-size: 2em;
+    width: 100%;
+
+    color: #ffb7ce;
+    font-weight: bold;
+}
+.wavy {
+    animation-name: wavy;
+    animation-duration: 1.3s;
+    animation-timing-function: cubic-bezier(0.445, 0.050, 0.550, 0.950);;
+    animation-iteration-count: infinite;
+    position: relative;
+    display: inline-block;
+    top: 0;
+    left: 0;
+}
