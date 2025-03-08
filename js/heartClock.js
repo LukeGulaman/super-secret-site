@@ -9,10 +9,38 @@ const root = document.querySelector(":root"),
     tick1 = new Audio("assets/sounds/tick1.mp3"),
     tick2 = new Audio("assets/sounds/tick2.mp3");
 
-const oneDay = 24*60*60*1000;
+const oneDay = 24 * 60 * 60 * 1000;
 
 let intervalId;
 let tick = 0;
+
+function nodeScriptReplace(node) {
+    if (nodeScriptIs(node) === true) {
+        node.parentNode.replaceChild(nodeScriptClone(node), node);
+    }
+    else {
+        var i = -1, children = node.childNodes;
+        while (++i < children.length) {
+            nodeScriptReplace(children[i]);
+        }
+    }
+
+    return node;
+}
+function nodeScriptClone(node) {
+    var script = document.createElement("script");
+    script.text = node.innerHTML;
+
+    var i = -1, attrs = node.attributes, attr;
+    while (++i < attrs.length) {
+        script.setAttribute((attr = attrs[i]).name, attr.value);
+    }
+    return script;
+}
+
+function nodeScriptIs(node) {
+    return node.tagName === 'SCRIPT';
+}
 
 function changeTime(startDate, endDate) {
     let diff = new Date(endDate).getTime() - new Date(startDate).getTime();
@@ -20,8 +48,8 @@ function changeTime(startDate, endDate) {
     let h = 0;
     let m = 0;
     let s = 0;
-    
-    while(diff > 1) {
+
+    while (diff > 1) {
         if (diff > 8.64e+7) { // days
             d++; diff -= 8.64e+7;
             continue;
@@ -48,13 +76,16 @@ function timePercentage(startDate, currentDate, endDate) {
     const sp1 = new Date(endDate).getTime() - startTime;
     const sp2 = new Date(currentDate).getTime() - startTime;
 
-    return Math.round(sp2/sp1*10000)/100;
+    return Math.round(sp2 / sp1 * 10000) / 100;
 }
 function transitionToPage() {
     clearInterval(intervalId);
     intervalId = null;
 
-    
+    fetch("new.html").then(response => response.text()).then(text => {
+        document.querySelector('html').innerHTML = text;
+        nodeScriptReplace(document.getElementsByTagName("body")[0]);
+    });
 }
 function startClock() {
     setTimeout(() => {
@@ -64,15 +95,14 @@ function startClock() {
             const date = new Date();
             timeLeft = timePercentage(startOfFile, date, anniversaryDate);
             root.style.setProperty("--degree", `${(360 * (timeLeft / 100)).toFixed(2)}deg`);
-    
+
             changeTime(date, anniversaryDate);
             document.title = `${Math.round(Math.abs((date - anniversaryDate) / oneDay))} days left :3`;
 
-            console.log(timeLeft);
             if (timeLeft >= 100) {
                 return transitionToPage();
             }
-    
+
             if ((tick % 2) == 0) tick1.play(); else tick2.play();
             tick++;
         }, 1000)

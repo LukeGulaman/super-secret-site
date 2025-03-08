@@ -5,18 +5,25 @@
 
 @keyframes scrollBackground {
     from { background-position: 0px 0; }
-    to { background-position: -500px -500px; }
+    to { background-position: -200px -200px; }
 }
 
 * {
     font-family: 'Montserrat';
 }
+.center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
 
 body {
     background-image: url(../assets/imgs/background.png);
     background-repeat: repeat;
-    background-size: 500px;
-    animation: scrollBackground 25s linear infinite normal;
+    background-size: 200px;
+    backdrop-filter: contrast(80%) brightness(50%);
+    animation: scrollBackground 15s linear infinite normal;
 
     margin: 0;
 }
@@ -37,8 +44,8 @@ body {
     transform: translate(-50%, -50%);
     overflow: hidden;
 
-    width: 5vw;
-    height: 5vw;
+    width: 10vw;
+    height: 10vw;
     transition: 2.5s ease;
     background-color: white;
 
@@ -47,6 +54,8 @@ body {
     z-index: 10;
 }
 #welcomeText {
+    font-weight: bold;
+
     position: absolute;
     top: 60%;
     left: 50%;
@@ -79,7 +88,7 @@ body {
 
     text-align: center;
     font-weight: bold;
-    font-size: 1.4cqw;
+    font-size: 1.5em;
 
     width: 100%;
     padding: 15px;
@@ -92,7 +101,7 @@ body {
 
     text-align: center;
     font-weight: bold;
-    font-size: 1.1cqw;
+    font-size: 1.25em;
 
     width: 40%;
     padding: 5px;
@@ -101,7 +110,7 @@ body {
     border-radius: 0 0 15px 15px;
 }
 #timecontainer {
-    width: 40%;
+    width: 50vw;
 }
 
 .middleItems {

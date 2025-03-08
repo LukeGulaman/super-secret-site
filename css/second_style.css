@@ -1,0 +1,86 @@
+@keyframes titleBounceIn {
+    0% { transform: scale(0%); }
+    60% { transform: scale(110%); }
+    90% { transform: scale(110%) rotate(2deg); }
+    100% { transform: scale(100%) rotate(2deg); }
+}
+@keyframes starIn {
+    0% { transform: scale(0%); }
+    60% { transform: scale(150%); }
+    100% { transform: scale(100%); }
+}
+@keyframes titleSpan {
+    0% { font-size: 1em; }
+    80% { font-size: 4em; }
+    100% { font-size: 3em; }
+}
+@keyframes starRotate {
+    0% { transform: rotate(0deg); }
+    50% { transform: rotate(180deg); }
+    100% { transform: rotate(360deg); }
+}
+@keyframes swayRotate {
+    0% { transform: rotate(2deg); }
+    50% { transform: rotate(4deg); }
+    100% { transform: rotate(2deg); }
+}
+@keyframes shockwave {
+    0% {transform: scale(0%) rotate(0deg); opacity: 0.5;}
+    100% {transform: scale(500%) rotate(15deg); opacity: 0;}
+}
+
+:root {
+    --title-animation-delay: 0.5s;
+}
+body {
+    overflow: hidden;
+}
+p {
+    font-size: 1.25em;
+    color: white;
+}
+#pBox {
+    max-height: 0;
+    opacity: 0;
+    transition: opacity 1s, max-height 5s ease-out;
+    overflow: hidden;
+}
+#title {
+    font-size: 4vw;
+    font-weight: 900;
+    color: transparent;
+    background-image: linear-gradient(pink, violet);
+    background-clip: text;
+
+    animation: 2s ease-in-out var(--title-animation-delay) 1 titleBounceIn forwards, 5s ease-in-out calc(var(--title-animation-delay) + 2s) infinite swayRotate;
+    transform: scale(0%);
+}
+#titleSpan {
+    display: inline-block;
+    animation: 2s ease-in-out var(--title-animation-delay) 1 titleSpan;
+    animation-fill-mode: forwards;
+    opacity: 1;
+}
+#circleStar {
+    position: absolute;
+    width: 25vw;
+    height: 25vw;
+    opacity: 0.25;
+    left: 31%;
+    transform: scale(0%);
+
+    animation: 2s ease-in-out var(--title-animation-delay) 1 starIn, 15s linear calc(var(--title-animation-delay) + 2s) infinite starRotate;
+}
+#heartShockwave {
+    position: absolute;
+    width: 25vw;
+    height: 25vw;
+    opacity: 0.5;
+    left: 31%;
+    transform: scale(0%);
+
+    animation: 4s ease-out calc(var(--title-animation-delay) + 2s) 1 shockwave;
+}
+#bodyDiv {
+    margin: 0 20%;
+}
