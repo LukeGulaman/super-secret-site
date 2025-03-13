@@ -2,6 +2,7 @@ const root = document.querySelector(":root"),
     timeText = document.getElementById("time"),
     heartTick = document.getElementById("heartTick"),
     trainText = document.getElementById("trainText"),
+    heartParticle = document.getElementsByClassName("heartParticles")[0],   
 
     anniversaryDate = new Date("2025-03-13T19:01:00"),
     startOfFile = new Date("2025-02-11T12:00:00"),
@@ -82,10 +83,21 @@ function transitionToPage() {
     clearInterval(intervalId);
     intervalId = null;
 
-    fetch("new.html").then(response => response.text()).then(text => {
-        document.querySelector('html').innerHTML = text;
-        nodeScriptReplace(document.getElementsByTagName("body")[0]);
-    });
+    let heartParticleInt = setInterval(() => {
+        let h = heartParticle.cloneNode();
+        const heartKeyframes = [
+            {}
+        ]
+    }, 250);
+    setTimeout(() => {
+        clearInterval(heartParticleInt);
+        heartParticleInt = null;
+    }, 5000)
+
+    // fetch("new.html").then(response => response.text()).then(text => {
+    //     document.querySelector('html').innerHTML = text;
+    //     nodeScriptReplace(document.getElementsByTagName("body")[0]);
+    // });
 }
 function startClock() {
     setTimeout(() => {
@@ -106,7 +118,7 @@ function startClock() {
             if ((tick % 2) == 0) tick1.play(); else tick2.play();
             tick++;
         }, 1000)
-    }, 1000 - new Date().getMilliseconds());
+    }, 1000 - new Date().getMilliseconds());``
 }
 
 changeTime(new Date(), anniversaryDate);

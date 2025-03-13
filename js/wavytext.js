@@ -9,6 +9,11 @@ function getRandomInt(max) {
 function updateText(text){
     let delay = 200;
     let h1 = document.getElementById("trainText");
+
+    if (!h1) {
+        clearInterval(interval);
+        return;
+    }
     
     h1.innerHTML = text
         .split("")
@@ -26,6 +31,6 @@ function updateText(text){
 }
 
 updateText(loveTrainText[getRandomInt(3)]);   
-setInterval(() => {
+let interval = setInterval(() => {
     updateText(loveTrainText[getRandomInt(3)]);
 }, 60*1000)

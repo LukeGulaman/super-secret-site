@@ -10,9 +10,9 @@
     100% { transform: scale(100%); }
 }
 @keyframes titleSpan {
-    0% { font-size: 1em; }
-    80% { font-size: 4em; }
-    100% { font-size: 3em; }
+    0% { font-size: 0vw; }
+    80% { font-size: 12vw; }
+    100% { font-size: 8vw; }
 }
 @keyframes starRotate {
     0% { transform: rotate(0deg); }
@@ -36,6 +36,8 @@ body {
     overflow: hidden;
 }
 p {
+    font-family: 'Inconsolata';
+    text-align: center;
     font-size: 1.25em;
     color: white;
 }
@@ -43,30 +45,47 @@ p {
     max-height: 0;
     opacity: 0;
     transition: opacity 1s, max-height 5s ease-out;
+    height: fit-content;
     overflow: hidden;
 }
-#title {
-    font-size: 4vw;
+#titleBox {
+    display: flex;
+    flex-direction: row;
+    animation: 2s ease-in-out var(--title-animation-delay) 1 titleBounceIn forwards, 5s ease-in-out calc(var(--title-animation-delay) + 2s) infinite swayRotate;
+
+    transform: scale(0%);
+}
+.title {
+    font-size: 5vw;
+    font-weight: 900;
+    color: transparent;
+    background-image: linear-gradient(pink, violet);
+    background-clip: text;
+}
+#titleSpan {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 0vw;
     font-weight: 900;
     color: transparent;
     background-image: linear-gradient(pink, violet);
     background-clip: text;
 
-    animation: 2s ease-in-out var(--title-animation-delay) 1 titleBounceIn forwards, 5s ease-in-out calc(var(--title-animation-delay) + 2s) infinite swayRotate;
-    transform: scale(0%);
-}
-#titleSpan {
-    display: inline-block;
     animation: 2s ease-in-out var(--title-animation-delay) 1 titleSpan;
     animation-fill-mode: forwards;
     opacity: 1;
+    padding: 0 2%;
 }
+/* #titleBox {
+    margin-top: 10%;
+} */
 #circleStar {
     position: absolute;
     width: 25vw;
     height: 25vw;
     opacity: 0.25;
-    left: 31%;
     transform: scale(0%);
 
     animation: 2s ease-in-out var(--title-animation-delay) 1 starIn, 15s linear calc(var(--title-animation-delay) + 2s) infinite starRotate;
@@ -76,11 +95,12 @@ p {
     width: 25vw;
     height: 25vw;
     opacity: 0.5;
-    left: 31%;
     transform: scale(0%);
+    z-index: 0;
 
-    animation: 4s ease-out calc(var(--title-animation-delay) + 2s) 1 shockwave;
+    animation: 1.5s ease-out calc(var(--title-animation-delay) + 2s) 1 shockwave;
 }
 #bodyDiv {
+    height: fit-content;
     margin: 0 20%;
 }
