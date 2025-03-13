@@ -1,0 +1,42 @@
+@property --degree {
+    syntax: '<angle>';
+    inherits: true;
+    initial-value: 0deg;
+}
+@property --tick {
+    syntax: '<angle>';
+    inherits: true;
+    initial-value: 0deg;
+}
+
+@keyframes rotateGradient {
+    0% {
+        --tick: 0deg; 
+        filter: brightness(2);
+    }
+    100% {
+        --tick: 360deg; 
+        filter: brightness(1);
+    }
+}
+
+:root {
+    --degree: 0deg;
+    --tick: 0deg;
+}
+
+#heartClock {
+    height: 400px;
+    width: 400px;
+    mask-image: conic-gradient(white 0deg var(--degree), transparent 0deg 360deg);
+    transition: --degree 1s;
+}
+#heartTick {
+    height: 400px;
+    width: 400px;
+    mask-image: conic-gradient(from var(--tick), transparent 0deg 0deg, #ffffff90 360deg 90deg);
+    position: absolute;
+
+    opacity: 0.5;
+    z-index: 1;
+}
