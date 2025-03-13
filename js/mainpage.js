@@ -8,7 +8,7 @@ music.volume = 0.5;
 
 setTimeout(() => {
     pBox.style.opacity = "1";
-    pBox.style.maxHeight = "2000px";
+    pBox.style.maxHeight = "3000px";
     titleBox.style.paddingTop = "10%";
     document.body.style.overflow = "visible";
     divBody.style.justifyContent = "start";

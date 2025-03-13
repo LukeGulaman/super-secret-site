@@ -1,20 +1,26 @@
 const root = document.querySelector(":root"),
     timeText = document.getElementById("time"),
     heartTick = document.getElementById("heartTick"),
+    heartDiv = document.getElementById("heartDiv"),
     trainText = document.getElementById("trainText"),
+    whiteGlow = document.getElementById("whiteGlow"),
     heartParticle = document.getElementsByClassName("heartParticles")[0],   
 
     anniversaryDate = new Date("2025-03-13T19:01:00"),
     startOfFile = new Date("2025-02-11T12:00:00"),
 
     tick1 = new Audio("assets/sounds/tick1.mp3"),
-    tick2 = new Audio("assets/sounds/tick2.mp3");
+    tick2 = new Audio("assets/sounds/tick2.mp3"),
+    splashBuildup = new Audio("assets/sounds/splash_buildup.ogg");
 
 const oneDay = 24 * 60 * 60 * 1000;
 
 let intervalId;
 let tick = 0;
 
+function getRandomNumber(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
 function nodeScriptReplace(node) {
     if (nodeScriptIs(node) === true) {
         node.parentNode.replaceChild(nodeScriptClone(node), node);
@@ -82,22 +88,41 @@ function timePercentage(startDate, currentDate, endDate) {
 function transitionToPage() {
     clearInterval(intervalId);
     intervalId = null;
+    splashBuildup.play();
+
+    whiteGlow.style.animation = "20s ease-in whiteGlowGrow";
+    whiteGlow.style.animationFillMode = "forwards"
 
     let heartParticleInt = setInterval(() => {
-        let h = heartParticle.cloneNode();
+        const h = heartParticle.cloneNode();
+        const width = getRandomNumber(-990, 990);
+        const height = getRandomNumber(-540, 540);
+
         const heartKeyframes = [
-            {}
+            {transform: `translate(${width}px, ${height}px) scale(100%)`, opacity: 0},
+            {transform: "translate(0px, 0px) scale(0)", opacity: 1}
         ]
-    }, 250);
+        const heartTiming = {
+            duration: 3000,
+            iterations: 1,
+            easing: "ease-in",
+            fill: "forwards"
+        }
+
+        heartDiv.appendChild(h);
+        h.style.display="inline";
+
+        h.animate(heartKeyframes, heartTiming);
+    }, 100);
     setTimeout(() => {
         clearInterval(heartParticleInt);
         heartParticleInt = null;
-    }, 5000)
 
-    // fetch("new.html").then(response => response.text()).then(text => {
-    //     document.querySelector('html').innerHTML = text;
-    //     nodeScriptReplace(document.getElementsByTagName("body")[0]);
-    // });
+        fetch("new.html").then(response => response.text()).then(text => {
+            document.querySelector('html').innerHTML = text;
+            nodeScriptReplace(document.getElementsByTagName("body")[0]);
+        });
+    }, 15000)
 }
 function startClock() {
     setTimeout(() => {
